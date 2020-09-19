@@ -5,27 +5,27 @@ body {
 /* Title of Page */
 #titleOfPage {
   text-align: center;
-  font-size: 3em
-  margin-top: 150px
+  font-size: 3em;
+  margin-top: 200px;
 }
 
 /* About Section */
 
 .About {
   text-align: center;
-  margin-top: 100px
-  margin-bottom: 100px
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 #aboutText {
-  font-size: 18px
-  font-weight: 600px
+  font-size: 18px;
+  font-weight: 600px;
   
 }
 
 #Instructions {
-  font-size: 18px
-  font-weight: 600px
+  font-size: 18px;
+  font-weight: 600px;
 }
 
 /* Dropdown Button */
@@ -35,10 +35,10 @@ body {
   padding: 16px;
   font-size: 16px;
   border: none;
-  margin-top: 100px
-  margin-bottom: 100px
-  margin-left: 150px
-  margin-right: 100px
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-left: 150px;
+  margin-right: 100px;
 }
 
 /* Position the drop down content */
