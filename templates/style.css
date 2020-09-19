@@ -1,0 +1,48 @@
+/* Body */
+body {
+  font-family: "Avantgarde", TeX;
+  background-color: #9dd2fa;
+  text-align: center;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #0c21a8;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* Position the drop down content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (hidden unless hovered over) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #0c21a8;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links in the dropdown menu */
+.dropdown-content a {
+  color: #ffffff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of link when hovered over */
+.dropdown-content a:hover {background-color: #b8b8b8;}
+
+/* Menu drops down when hovered over */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the menu button when menu drops down */
+.dropdown:hover .dropbtn {background-color: #f04646;}
