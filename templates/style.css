@@ -26,12 +26,18 @@ body {
 #aboutText {
   font-size: 18px;
   font-weight: 600px;
+  margin-top: 15px
+  margin-bottom: 15px
+  margin-left: 20px
+  margin-right: 20px
   
 }
 
 #Instructions {
   font-size: 18px;
   font-weight: 600px;
+  margin-left: 20px
+  margin-right: 20px
 }
 
 /* Dropdown Button */
