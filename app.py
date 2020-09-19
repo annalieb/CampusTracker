@@ -17,11 +17,21 @@ def index():
 
 @app.route('/wellesley')
 def wellesley():
+    results = get_wellesley_data()
+    return render_template('wellesley.html', data=results)
+
+def get_wellesley_data():
     url = "https://www.wellesley.edu/coronavirus/dashboard"
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     results = soup.find_all('span', class_='number')
-    return render_template('wellesley.html', data=results)
+    data = ['Wellesley']
+    for r in results:
+        data.append(r.text)
+    return data # College name, weekly tests, weekly positive cases
+
+def get_mit_data():
+    return None
 
 if __name__ == "__main__":
     app.debug = True
