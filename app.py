@@ -114,13 +114,6 @@ def get_mit_data():
     return results # College name, weekly tests, weekly positive cases
 
 def get_harvard_data():
-    # url = "https://www.harvard.edu/coronavirus/harvard-university-wide-covid-19-testing-dashboard"
-    # page = requests.get(url)
-    # soup = BeautifulSoup(page.content, 'html.parser')
-    # results = soup.find_all('div', class_='card__text')
-    # data = ['Harvard']
-    # data.append(results[0].text.strip()[:-1])
-    # data.append(results[1].text.strip())
     scraping_job_creation = {
     	"sitemap_id": 331306,
     	"driver": "fulljs",
@@ -139,13 +132,45 @@ def get_harvard_data():
     return results # College name, weekly tests, weekly positive cases
 
 def get_bu_data():
-    return "hi"
+    scraping_job_creation = {
+    	"sitemap_id": 331315,
+    	"driver": "fulljs",
+    	"page_load_delay": 15000,
+    	"request_interval": 2000,
+    	"proxy": 0
+    }
+    req = requests.post("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", json=scraping_job_creation)
+    resp = json.loads(req.text)
+    scraping_job_id = int(resp['data']['id'])
+    time.sleep(60)
+    url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
+    pop = requests.get(url)
+    data = json.loads(pop.text)
+    daily_avg_tests = float(data['7-day-avg-daily-tests'][0:5].replace(',', ''))
+    daily_pos_rate = float(data['7-day-avg-pos-rate'][0:4]) / 100
+    results = ['BU', int(daily_avg_tests * 7), int(daily_avg_tests * 7 * daily_pos_rate)]
+    return results # College name, weekly tests, weekly positive cases
 
 def get_nu_data():
     return "hi"
 
 def get_bc_data():
-    return "hi"
+    scraping_job_creation = {
+    	"sitemap_id": 331319,
+    	"driver": "fulljs",
+    	"page_load_delay": 2000,
+    	"request_interval": 2000,
+    	"proxy": 0
+    }
+    req = requests.post("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", json=scraping_job_creation)
+    resp = json.loads(req.text)
+    scraping_job_id = int(resp['data']['id'])
+    time.sleep(30)
+    url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
+    pop = requests.get(url)
+    data = json.loads(pop.text)
+    results = ['BC', data['7-day-tests'], data['7-day-pos-tests']]
+    return results # College name, weekly tests, weekly positive cases
 
 def get_babson_data():
     return "hi"
