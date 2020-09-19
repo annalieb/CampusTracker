@@ -1,7 +1,17 @@
-/* Body */
 body {
   font-family: "Avantgarde", TeX;
   background-color: #9dd2fa;
+}
+
+/* Title of Page */
+.titleOfPage {
+  font-family: "Avantgarde", TeX;
+  text-align: center;
+}
+
+/* About Section */
+.aboutSection {
+  font-family: "Avantgarde", TeX;
   text-align: center;
 }
 
