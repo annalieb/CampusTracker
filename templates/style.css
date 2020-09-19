@@ -1,7 +1,7 @@
 body {
   font-family: "Avantgarde", TeX;
   margin-bottom: 200px
-  text-align: center;
+  
 }
 
 /* Title of Page */
@@ -43,70 +43,9 @@ body {
 
 /* College pages */
 
-.Wellesley {
+.college {
   text-align: center;
   margin-bottom: 100px;
-}
-
-.MIT {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.Harvard {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.BU {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.BC {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.NU {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.Tufts {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.NEC {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.Babson {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.Olin {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-.Brandeis {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-/* Dropdown Button */
-.dropbtn {
-  background-color: #0c21a8;
-  color: white;
-  padding: 24px;
-  font-size: 20px;
-  border: none;
-  margin-top: 25px;
-  margin-left: 50px;
 }
 
 /* Position the drop down content */
