@@ -31,6 +31,41 @@ def harvard():
     resp = get_harvard_data()
     return render_template('harvard.html', data=resp)
 
+@app.route('/bu')
+def bu():
+    resp = get_bu_data()
+    return render_template('bu.html', data=resp)
+
+@app.route('/nu')
+def nu():
+    resp = get_nu_data()
+    return render_template('nu.html', data=resp)
+
+@app.route('/bc')
+def bc():
+    resp = get_bc_data()
+    return render_template('bc.html', data=resp)
+
+@app.route('/babson')
+def babson():
+    resp = get_babson_data()
+    return render_template('babson.html', data=resp)
+
+@app.route('/olin')
+def olin():
+    resp = get_olin_data()
+    return render_template('olin.html', data=resp)
+
+@app.route('/brandeis')
+def brandeis():
+    resp = get_brandeis_data()
+    return render_template('brandeis.html', data=resp)
+
+@app.route('/tufts')
+def tufts():
+    resp = get_tufts_data()
+    return render_template('tufts.html', data=resp)
+
 def get_wellesley_data():
     # Data for creating scraping job
     scraping_job_creation = {
@@ -76,6 +111,27 @@ def get_harvard_data():
     data.append(results[0].text.strip()[:-1])
     data.append(results[1].text.strip())
     return data # College name, weekly tests, weekly positive cases
+
+def get_bu_data():
+    return "hi"
+
+def get_nu_data():
+    return "hi"
+
+def get_bc_data():
+    return "hi"
+
+def get_babson_data():
+    return "hi"
+
+def get_olin_data():
+    return "hi"
+
+def get_brandeis_data():
+    return "hi"
+
+def get_tufts_data():
+    return "hi"
 
 if __name__ == "__main__":
     app.debug = True
