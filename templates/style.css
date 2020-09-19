@@ -15,18 +15,18 @@ body {
 
 /* About Section */
 #aboutSection {
-  font-size: 2.5em
+  font-size: 18px
 }
 
 #aboutText {
   font-size: 16px
-  font-weight: lighter
+  font-weight: 500px
   
 }
 
 #Instructions {
   font-size: 16px
-  font-weight: lighter
+  font-weight: 500px
 }
 
 /* Dropdown Button */
