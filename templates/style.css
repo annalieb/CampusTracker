@@ -27,17 +27,17 @@ body {
   font-size: 18px;
   font-weight: 600px;
   margin-top: 15px
-  margin-bottom: 15px
-  margin-left: 20px
-  margin-right: 20px
+  margin-bottom: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
   
 }
 
 #Instructions {
   font-size: 18px;
   font-weight: 600px;
-  margin-left: 20px
-  margin-right: 20px
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 /* Dropdown Button */
@@ -65,6 +65,7 @@ body {
   min-width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  margin-left: 50px
 }
 
 /* Links in the dropdown menu */
