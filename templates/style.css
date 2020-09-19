@@ -4,13 +4,26 @@ body {
 }
 
 /* Title of Page */
-.titleOfPage {
+#titleOfPage {
   text-align: center;
+  font-size: 3em
 }
 
 /* About Section */
-.aboutSection {
+#aboutSection {
   text-align: center;
+  font-size: 2.5em
+}
+
+#aboutText {
+  text-align: center;
+  font-size: 16px
+  
+}
+
+#Instructions {
+  text-align: center
+  font-size: 16px
 }
 
 /* Dropdown Button */
