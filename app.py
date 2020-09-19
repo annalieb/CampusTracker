@@ -33,6 +33,16 @@ def get_wellesley_data():
 def get_mit_data():
     return None
 
+def get_harvard_data():
+    url = "https://www.harvard.edu/coronavirus/harvard-university-wide-covid-19-testing-dashboard"
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    results = soup.find_all('div', class_='card__text')
+    data = ['Harvard']
+    data.append(results[0].text.strip()[:-1])
+    data.append(results[1].text.strip())
+    return data # College name, weekly tests, weekly positive cases
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
