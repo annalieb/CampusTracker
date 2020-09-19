@@ -78,15 +78,10 @@ def get_wellesley_data():
     req = requests.post("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", json=scraping_job_creation)
     resp = json.loads(req.text)
     scraping_job_id = int(resp['data']['id'])
-    print(scraping_job_id)
-    # scraping_job_id = 2819617
     time.sleep(30)
     url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
     pop = requests.get(url)
-    # pop = requests.get("https://api.webscraper.io/api/v1/scraping-job/2819611/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU")
-    #print(pop.read())
     data = json.loads(pop.text)
-    print(data)
     results = ['Wellesley', data['weekly-asymptomatic-results'], data['weekly-positive-results']]
     return results # College name, weekly tests, weekly positive cases
 
@@ -98,9 +93,26 @@ def get_mit_data():
     	"request_interval": 2000,
     	"proxy": 0
     }
-    resp = requests.post("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", json=scraping_job_creation)
-    print(resp.text)
-    return resp.text
+    # req = requests.post("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", json=scraping_job_creation)
+    # resp = json.loads(req.text)
+    # scraping_job_id = int(resp['data']['id'])
+    # time.sleep(60)
+    scraping_job_id = 2819616
+    url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
+    pop = requests.get(url)
+    data = json.loads(pop.text)
+    tests_array = ['sat-tests', 'fri-tests', 'thurs-tests', 'wed-tests', 'tues-tests', 'mon-tests', 'sun-tests']
+    tests_total = 0
+    for test in tests_array:
+        tests_total += float(str(data[test]).replace(',', ''))
+    pos_tests_array = ['sat-pos-tests', 'fri-pos-tests', 'thurs-pos-tests', 'wed-pos-tests', 'tues-pos-tests', 'mon-pos-tests', 'sun-pos-tests']
+    pos_tests_total = 0
+    for pos_test in pos_tests_array:
+        pos_tests_total += float(str(data[pos_test]).replace(',', ''))
+    # tests = float(data['sat-tests']) + float(data['fri-tests']) + data['thurs-tests'] + data['wed-tests'] + data['tues-tests'] + data['mon-tests'] + data['sun-tests']
+    # pos_tests = data['sat-pos-tests'] + data['fri-pos-tests'] + data['thurs-pos-tests'] + data['wed-pos-tests'] + data['tues-pos-tests'] + data['mon-pos-tests'] + data['sun-pos-tests']
+    results = ['MIT', int(tests_total), int(pos_tests_total)]
+    return results # College name, weekly tests, weekly positive cases
 
 def get_harvard_data():
     url = "https://www.harvard.edu/coronavirus/harvard-university-wide-covid-19-testing-dashboard"
