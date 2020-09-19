@@ -9,21 +9,24 @@ body {
   font-size: 3em
 }
 
+.About {
+  text-align: center;
+}
+
 /* About Section */
 #aboutSection {
-  text-align: center;
   font-size: 2.5em
 }
 
 #aboutText {
-  text-align: center;
   font-size: 16px
+  font-weight: lighter
   
 }
 
 #Instructions {
-  text-align: center
   font-size: 16px
+  font-weight: lighter
 }
 
 /* Dropdown Button */
