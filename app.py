@@ -37,35 +37,10 @@ def bu():
     tests, pos = college_data_csv('BU')
     return render_template('bu.html', tests=tests, pos=pos)
 
-@app.route('/nu')
-def nu():
-    resp = get_nu_data()
-    return render_template('nu.html', data=resp)
-
 @app.route('/bc')
 def bc():
     tests, pos = college_data_csv('BC')
     return render_template('bc.html', tests=tests, pos=pos)
-
-@app.route('/babson')
-def babson():
-    resp = get_babson_data()
-    return render_template('babson.html', data=resp)
-
-@app.route('/olin')
-def olin():
-    resp = get_olin_data()
-    return render_template('olin.html', data=resp)
-
-@app.route('/brandeis')
-def brandeis():
-    resp = get_brandeis_data()
-    return render_template('brandeis.html', data=resp)
-
-@app.route('/tufts')
-def tufts():
-    resp = get_tufts_data()
-    return render_template('tufts.html', data=resp)
 
 def get_wellesley_data():
     # Data for creating scraping job
@@ -83,7 +58,6 @@ def get_wellesley_data():
     url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
     pop = requests.get(url)
     data = json.loads(pop.text)
-    # results = ['Wellesley', data['weekly-asymptomatic-results'], data['weekly-positive-results']]
     results = 'Wellesley,' + data['weekly-asymptomatic-results'].replace(',', '') + ',' + data['weekly-positive-results'].replace(',', '') + '\n'
     print('scraped')
     print(results)
@@ -97,10 +71,6 @@ def get_mit_data():
     	"request_interval": 2000,
     	"proxy": 0
     }
-    # req = requests.post("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", json=scraping_job_creation)
-    # resp = json.loads(req.text)
-    # scraping_job_id = int(resp['data']['id'])
-    # time.sleep(60)
     scraping_job_id = 2819616
     url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
     pop = requests.get(url)
@@ -114,7 +84,6 @@ def get_mit_data():
     pos_tests_total = 0
     for pos_test in pos_tests_array:
         pos_tests_total += float(str(data[pos_test]).replace(',', ''))
-    # results = ['MIT', int(tests_total), int(pos_tests_total)]
     results = 'MIT,' + str(int(tests_total)) + ',' + str(int(pos_tests_total)) + '\n'
     print('scraped')
     print(results)
@@ -135,7 +104,6 @@ def get_harvard_data():
     url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
     pop = requests.get(url)
     data = json.loads(pop.text)
-    # results = ['Harvard', data['7-days-tests'], data['7-days-pos-tests']]
     results = 'Harvard,' + data['7-days-tests'][:-1].replace(',', '') + ',' + data['7-days-pos-tests'].replace(',', '') + '\n'
     print('scraped')
     return results # College name, weekly tests, weekly positive cases
@@ -157,13 +125,9 @@ def get_bu_data():
     data = json.loads(pop.text)
     daily_avg_tests = float(data['7-day-avg-daily-tests'][0:5].replace(',', ''))
     daily_pos_rate = float(data['7-day-avg-pos-rate'][0:4]) / 100
-    # results = ['BU', int(daily_avg_tests * 7), int(daily_avg_tests * 7 * daily_pos_rate)]
     results = 'BU,' + str(int(daily_avg_tests * 7)) + ',' + str(int(daily_avg_tests * 7 * daily_pos_rate)) + '\n'
     print('scraped')
     return results # College name, weekly tests, weekly positive cases
-
-def get_nu_data():
-    return "hi"
 
 def get_bc_data():
     scraping_job_creation = {
@@ -184,18 +148,6 @@ def get_bc_data():
     results = 'BC,' + data['7-day-tests'].replace(',', '') + ',' + data['7-day-pos-tests'].replace(',', '') + '\n'
     print('scraped')
     return results # College name, weekly tests, weekly positive cases
-
-def get_babson_data():
-    return "hi"
-
-def get_olin_data():
-    return "hi"
-
-def get_brandeis_data():
-    return "hi"
-
-def get_tufts_data():
-    return "hi"
 
 def write_csv():
     f = open('school_data.csv', 'w')
