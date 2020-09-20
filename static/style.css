@@ -1,0 +1,78 @@
+/* blue: 07BEB8 */
+/* black: 272635 */
+/* purple: C86FC9 */
+/* beige: EDD4D4 */
+/* orange: F79256 */
+
+body {
+  font-family: 'Kumbh Sans', sans-serif;
+  color: #272635;
+  background-color: #EDD4D4;
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+  color: #EDD4D4;
+}
+
+/* Title of Page */
+#titleOfPage {
+  text-decoration: none;
+  text-align: center;
+  font-size: 3em;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  margin-bottom: 5px;
+  border-bottom: solid 2px #272635;
+  background-color: #06B1AB;
+  color: #EDD4D4;
+  width: 100%;
+}
+
+/* nav bar */
+nav {
+  margin-top: 0px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+nav a {
+  font-size: 20px;
+  padding: 5px;
+  width: 100px;
+  background-color: #272635;
+  color: #EDD4D4;
+  text-decoration: none;
+}
+
+/* Change color of link when hovered over */
+nav a:hover {
+  background-color: #C86FC9;
+}
+
+.data {
+  width: 40%;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #272635;
+  background-color: #F79256;
+  display: inline-block;
+}
+
+/* school logos */
+.logo {
+  margin:auto;
+  display: block;
+  object-fit: cover;
+  width: 200px;
+  padding-bottom: 30px;
+}
+
+/* About Section */
+
+.About {
+  text-align: center;
+  margin-bottom: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
+}

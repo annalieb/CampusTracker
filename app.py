@@ -9,6 +9,7 @@ import json
 import urllib
 import requests
 import time
+import csv
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
@@ -18,23 +19,23 @@ def index():
 
 @app.route('/wellesley')
 def wellesley():
-    resp = get_wellesley_data()
-    return render_template('wellesley.html', data=resp)
+    tests, pos = college_data_csv('Wellesley')
+    return render_template('wellesley.html', tests=tests, pos=pos)
 
 @app.route('/mit')
 def mit():
-    resp = get_mit_data()
-    return render_template('mit.html', data=resp)
+    tests, pos = college_data_csv('MIT')
+    return render_template('mit.html', tests=tests, pos=pos)
 
 @app.route('/harvard')
 def harvard():
-    resp = get_harvard_data()
-    return render_template('harvard.html', data=resp)
+    tests, pos = college_data_csv('Harvard')
+    return render_template('harvard.html', tests=tests, pos=pos)
 
 @app.route('/bu')
 def bu():
-    resp = get_bu_data()
-    return render_template('bu.html', data=resp)
+    tests, pos = college_data_csv('BU')
+    return render_template('bu.html', tests=tests, pos=pos)
 
 @app.route('/nu')
 def nu():
@@ -43,8 +44,8 @@ def nu():
 
 @app.route('/bc')
 def bc():
-    resp = get_bc_data()
-    return render_template('bc.html', data=resp)
+    tests, pos = college_data_csv('BC')
+    return render_template('bc.html', tests=tests, pos=pos)
 
 @app.route('/babson')
 def babson():
@@ -82,7 +83,10 @@ def get_wellesley_data():
     url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
     pop = requests.get(url)
     data = json.loads(pop.text)
-    results = ['Wellesley', data['weekly-asymptomatic-results'], data['weekly-positive-results']]
+    # results = ['Wellesley', data['weekly-asymptomatic-results'], data['weekly-positive-results']]
+    results = 'Wellesley,' + data['weekly-asymptomatic-results'].replace(',', '') + ',' + data['weekly-positive-results'].replace(',', '') + '\n'
+    print('scraped')
+    print(results)
     return results # College name, weekly tests, weekly positive cases
 
 def get_mit_data():
@@ -110,7 +114,10 @@ def get_mit_data():
     pos_tests_total = 0
     for pos_test in pos_tests_array:
         pos_tests_total += float(str(data[pos_test]).replace(',', ''))
-    results = ['MIT', int(tests_total), int(pos_tests_total)]
+    # results = ['MIT', int(tests_total), int(pos_tests_total)]
+    results = 'MIT,' + str(int(tests_total)) + ',' + str(int(pos_tests_total)) + '\n'
+    print('scraped')
+    print(results)
     return results # College name, weekly tests, weekly positive cases
 
 def get_harvard_data():
@@ -128,7 +135,9 @@ def get_harvard_data():
     url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
     pop = requests.get(url)
     data = json.loads(pop.text)
-    results = ['Harvard', data['7-days-tests'], data['7-days-pos-tests']]
+    # results = ['Harvard', data['7-days-tests'], data['7-days-pos-tests']]
+    results = 'Harvard,' + data['7-days-tests'][:-1].replace(',', '') + ',' + data['7-days-pos-tests'].replace(',', '') + '\n'
+    print('scraped')
     return results # College name, weekly tests, weekly positive cases
 
 def get_bu_data():
@@ -148,7 +157,9 @@ def get_bu_data():
     data = json.loads(pop.text)
     daily_avg_tests = float(data['7-day-avg-daily-tests'][0:5].replace(',', ''))
     daily_pos_rate = float(data['7-day-avg-pos-rate'][0:4]) / 100
-    results = ['BU', int(daily_avg_tests * 7), int(daily_avg_tests * 7 * daily_pos_rate)]
+    # results = ['BU', int(daily_avg_tests * 7), int(daily_avg_tests * 7 * daily_pos_rate)]
+    results = 'BU,' + str(int(daily_avg_tests * 7)) + ',' + str(int(daily_avg_tests * 7 * daily_pos_rate)) + '\n'
+    print('scraped')
     return results # College name, weekly tests, weekly positive cases
 
 def get_nu_data():
@@ -170,6 +181,8 @@ def get_bc_data():
     pop = requests.get(url)
     data = json.loads(pop.text)
     results = ['BC', data['7-day-tests'], data['7-day-pos-tests']]
+    results = 'BC,' + data['7-day-tests'].replace(',', '') + ',' + data['7-day-pos-tests'].replace(',', '') + '\n'
+    print('scraped')
     return results # College name, weekly tests, weekly positive cases
 
 def get_babson_data():
@@ -184,39 +197,19 @@ def get_brandeis_data():
 def get_tufts_data():
     return "hi"
 
+def write_csv():
+    f = open('school_data.csv', 'w')
+    f.write(get_wellesley_data() + get_mit_data() + get_harvard_data() + get_bu_data() + get_bc_data())
+    f.close()
+
+def college_data_csv(college):
+    with open('school_data_backup.csv', newline='') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in spamreader:
+            if row[0] == college:
+                return row[1], row[2]
+
 if __name__ == "__main__":
+    # write_csv()
     app.debug = True
     app.run()
-
-# Getting scraping job
-# pop = urllib.request.urlopen("https://api.webscraper.io/api/v1/scraping-job/2817859/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU")
-# data = [json.loads(pop.read())]
-
-# Data for creating scraping job
-# scraping_job_creation = {
-# 	"sitemap_id": 331219,
-# 	"driver": "fulljs",
-# 	"page_load_delay": 2000,
-# 	"request_interval": 2000,
-# 	"proxy": 0
-# }
-# Converting to json object?
-# json_object = json.dumps(scraping_job_creation)
-# new_json = json.loads(json_object)
-# print(json_object)
-# print(type(json_object))
-# data = urllib.parse.urlencode(scraping_job_creation).encode()
-# data = data.encode('ascii')
-# req = urllib.request.urlopen("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", data)
-# with req as f:
-#     print(f.read().decode('utf-8'))
-#resp = urllib.request.urlopen(req)
-
-
-# url = "https://www.wellesley.edu/coronavirus/dashboard"
-# page = requests.get(url)
-# soup = BeautifulSoup(page.content, 'html.parser')
-# results = soup.find_all('span', class_='number')
-# data = ['Wellesley']
-# for r in results:
-#     data.append(r.text)
