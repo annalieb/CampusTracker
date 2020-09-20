@@ -100,12 +100,13 @@ def get_harvard_data():
     req = requests.post("https://api.webscraper.io/api/v1/scraping-job?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU", json=scraping_job_creation)
     resp = json.loads(req.text)
     scraping_job_id = int(resp['data']['id'])
-    time.sleep(30)
+    time.sleep(40)
     url = "https://api.webscraper.io/api/v1/scraping-job/" + str(scraping_job_id).strip() + "/json?api_token=kBwQqhHkuCA1zvQXc44plXxzi0wLo90HqTWAbV01xGCMMS8YiXI1TO2hpkCU"
     pop = requests.get(url)
     data = json.loads(pop.text)
     results = 'Harvard,' + data['7-days-tests'][:-1].replace(',', '') + ',' + data['7-days-pos-tests'].replace(',', '') + '\n'
     print('scraped')
+    print(results)
     return results # College name, weekly tests, weekly positive cases
 
 def get_bu_data():
@@ -127,6 +128,7 @@ def get_bu_data():
     daily_pos_rate = float(data['7-day-avg-pos-rate'][0:4]) / 100
     results = 'BU,' + str(int(daily_avg_tests * 7)) + ',' + str(int(daily_avg_tests * 7 * daily_pos_rate)) + '\n'
     print('scraped')
+    print(results)
     return results # College name, weekly tests, weekly positive cases
 
 def get_bc_data():
@@ -147,11 +149,13 @@ def get_bc_data():
     results = ['BC', data['7-day-tests'], data['7-day-pos-tests']]
     results = 'BC,' + data['7-day-tests'].replace(',', '') + ',' + data['7-day-pos-tests'].replace(',', '') + '\n'
     print('scraped')
+    print(results)
     return results # College name, weekly tests, weekly positive cases
 
 def write_csv():
     f = open('school_data.csv', 'w')
-    f.write(get_wellesley_data() + get_mit_data() + get_harvard_data() + get_bu_data() + get_bc_data())
+    result_str = get_wellesley_data() + get_mit_data() + get_harvard_data() + get_bu_data() + get_bc_data()
+    f.write(result_str)
     f.close()
 
 def college_data_csv(college):
