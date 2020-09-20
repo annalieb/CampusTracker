@@ -1,20 +1,71 @@
+/* blue: 07BEB8 */
+/* black: 272635 */
+/* purple: C86FC9 */
+/* beige: EDD4D4 */
+/* orange: F79256 */
+
 body {
-  font-family: "Avantgarde", TeX;
-  margin-bottom: 200px
-  
+  font-family: 'Kumbh Sans', sans-serif;
+  color: #272635;
+  background-color: #EDD4D4;
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+  color: #EDD4D4;
 }
 
 /* Title of Page */
 #titleOfPage {
+  text-decoration: none;
   text-align: center;
   font-size: 3em;
-  margin-top: 50px;
-  margin-top: 50px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  margin-bottom: 5px;
+  border-bottom: solid 2px #272635;
+  background-color: #06B1AB;
+  color: #EDD4D4;
+  width: 100%;
 }
 
-/* Line */
-#line {
+/* nav bar */
+nav {
+  margin-top: 0px;
   text-align: center;
+  margin-bottom: 50px;
+}
+nav a {
+  font-size: 20px;
+  padding: 5px;
+  width: 100px;
+  background-color: #272635;
+  color: #EDD4D4;
+  text-decoration: none;
+}
+
+/* Change color of link when hovered over */
+nav a:hover {
+  background-color: #C86FC9;
+}
+
+.data {
+  width: 40%;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #272635;
+  background-color: #F79256;
+  display: inline-block;
+}
+
+/* school logos */
+.logo {
+  margin:auto;
+  display: block;
+  object-fit: cover;
+  width: 200px;
+  padding-bottom: 30px;
 }
 
 /* About Section */
@@ -22,63 +73,6 @@ body {
 .About {
   text-align: center;
   margin-bottom: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
-
-#aboutText {
-  font-size: 18px;
-  font-weight: 600px;
-  margin-top: 25px;
-  margin-bottom: 15px;
-  margin-left: 200px;
-  margin-right: 200px;
-  
-}
-
-#Instructions {
-  font-size: 18px;
-  font-weight: 600px;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-/* College pages */
-
-.college {
-  text-align: center;
-  margin-bottom: 100px;
-}
-
-/* Position the drop down content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (hidden unless hovered over) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #0c21a8;
-  min-width: 100%;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  margin-left: 50px;
-  margin-bottom: 100px
-}
-
-/* Links in the dropdown menu */
-.dropdown-content a {
-  color: #ffffff;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of link when hovered over */
-.dropdown-content a:hover {background-color: #b8b8b8;}
-
-/* Menu drops down when hovered over */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the menu button when menu drops down */
-.dropdown:hover .dropbtn {background-color: #f04646;}
